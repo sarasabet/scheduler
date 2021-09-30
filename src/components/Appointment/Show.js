@@ -1,5 +1,5 @@
 import React from "react";
-import "components/Appointment /styles.scss"
+import "components/Appointment/styles.scss"
 
 export default function Show(props) {
   console.log(props.interviewer.name)

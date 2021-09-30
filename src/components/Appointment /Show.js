@@ -2,8 +2,8 @@ import React from "react";
 import "components/Appointment /styles.scss"
 
 export default function Show(props) {
-  console.log(props)
-  return (
+  console.log(props.interviewer.name)
+  return (    
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
         <h2 className="text--regular">{props.student}</h2>
@@ -29,6 +29,7 @@ export default function Show(props) {
         </section>
       </section>
     </main>
+  
 
   )
 }

@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useDebugValue } from "react";
 import axios from "axios";
 
 import "components/Application.scss";
 import DayList from "./DayList.js";
 import Appointment from "components/Appointment/index.js"
-import {getAppointmentsForDay, getInterview} from "../helpers/selectors.js"
+import { getAppointmentsForDay, getInterview } from "../helpers/selectors.js"
+
 
 export default function Application(props) {
+
 
   const [state, setState] = useState({
     day: "Monday",
@@ -15,12 +17,9 @@ export default function Application(props) {
     interviewers: []
   });
 
-  const appointments = getAppointmentsForDay (state, state.day);
-
-
+  const appointments = getAppointmentsForDay(state, state.day);
   //udpate dayeState 
   const setDay = day => setState({ ...state, day });
-
 
 
   useEffect(() => {
@@ -67,8 +66,8 @@ export default function Application(props) {
       <section className="schedule">
 
         {appointments.map(appointment => {
-            const interview = getInterview(state, appointment.interview);
-            
+          const interview = getInterview(state, appointment.interview);  
+
           return (
 
             <Appointment

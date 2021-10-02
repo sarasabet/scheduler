@@ -4,17 +4,19 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "./DayList.js";
 import Appointment from "components/Appointment/index.js"
-import getAppointmentsForDay from "../helpers/selectors.js"
+import {getAppointmentsForDay, getInterview} from "../helpers/selectors.js"
 
 export default function Application(props) {
 
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: []
   });
 
-  const dailyAppointments = getAppointmentsForDay (state, state.day);
+  const appointments = getAppointmentsForDay (state, state.day);
+  // const interview = getInterview(state, appointment.interview);
 
   //udpate dayeState 
   const setDay = day => setState({ ...state, day });
@@ -28,6 +30,7 @@ export default function Application(props) {
       axios.get('/api/interviewers')
     ])
       .then(all => {
+        console.log(all)
         setState(prev => ({
           ...prev,
           days: all[0].data,
@@ -63,7 +66,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
 
-        {dailyAppointments.map(appointment => {
+        {appointments.map(appointment => {
             
           return (
 

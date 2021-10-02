@@ -8,16 +8,23 @@ export default function useVisualMode(initial) {
     if (replace) {
       history.pop();
     }
+    //update the MOde based on current situation
     setMode(mode);
-    history.push(mode);
+    // push the last current mode te the history , to make it trackable for future
+    history.push(mode); 
   };
 
-  function back() {
+  const back = () => {
     if (history.length > 1) {
-      history.pop();
-      setMode(history[history.length - 1]);
+      setHistory(history => {
+        const prevHistory = history.slice(0, history.length - 1);
+        setMode(prevHistory[prevHistory.length - 1]);
+        return prevHistory
+      });
     }
   }
 
+
   return { mode, transition, back }
 };
+

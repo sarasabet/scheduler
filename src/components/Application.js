@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useDebugValue } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import "components/Application.scss";
@@ -8,7 +8,6 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../h
 
 
 export default function Application(props) {
-
 
   const [state, setState] = useState({
     day: "Monday",
@@ -22,7 +21,6 @@ export default function Application(props) {
   //udpate dayeState 
   const setDay = day => setState({ ...state, day });
 
-
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -30,7 +28,7 @@ export default function Application(props) {
       axios.get('/api/interviewers')
     ])
       .then(all => {
-        console.log(all)
+
         setState(prev => ({
           ...prev,
           days: all[0].data,
@@ -39,6 +37,12 @@ export default function Application(props) {
         }))
       });
   }, []);
+
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
+
+  
 
 
   return (
@@ -55,6 +59,7 @@ export default function Application(props) {
             day={state.day}
             days={state.days}
             setDay={setState}
+            bookInterview={bookInterview()}
           />
 
         </nav>
@@ -77,6 +82,7 @@ export default function Application(props) {
               time={appointment.time}
               interview={interview}
               interviewers={dailyInterviewers}
+              bookInterview={bookInterview()}
             />
           )
         })}

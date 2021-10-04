@@ -23,7 +23,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
 
   );
-  console.log("props:",props)
+
 
   return (
     <Fragment>

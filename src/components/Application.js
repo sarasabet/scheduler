@@ -3,7 +3,7 @@ import axios from "axios";
 
 import "components/Application.scss";
 import DayList from "./DayList.js";
-import Appointment from "components/Appointment/index.js"
+import Appointment from "./Appointment"
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors.js"
 
 
@@ -16,11 +16,11 @@ export default function Application(props) {
     interviewers: []
   });
 
-  const appointments = getAppointmentsForDay(state, state.day);
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
   //udpate dayeState 
   const setDay = day => setState({ ...state, day });
-
+  console.log("state",state)
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -39,11 +39,25 @@ export default function Application(props) {
   }, []);
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
+
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    setState(prev => ({
+      ...prev,
+      appointments
+    }));
+     
+    // console.log(id, interview);
   }
-
-  
-
 
   return (
     <main className="layout">
@@ -58,8 +72,8 @@ export default function Application(props) {
           <DayList
             day={state.day}
             days={state.days}
-            setDay={setState}
-            bookInterview={bookInterview()}
+            setDay={setDay}
+            bookInterview={bookInterview}
           />
 
         </nav>
@@ -71,7 +85,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
 
-        {appointments.map(appointment => {
+        {dailyAppointments.map(appointment => {
           const interview = getInterview(state, appointment.interview);  
 
           return (
@@ -82,7 +96,7 @@ export default function Application(props) {
               time={appointment.time}
               interview={interview}
               interviewers={dailyInterviewers}
-              bookInterview={bookInterview()}
+              bookInterview={bookInterview}
             />
           )
         })}

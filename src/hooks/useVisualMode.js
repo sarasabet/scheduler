@@ -7,27 +7,20 @@ export default function useVisualMode(initial) {
 
   function transition( mode, replace=false) {
 
-    setMode(mode)
-    let newHistory;
     if(replace) {
-      newHistory = [...history.slice(0-1)]
+      setHistory(prev => [...prev.slice(0-1), mode]) 
     } else {
-      newHistory =[...history, mode]
+      setHistory(prev => [...prev, mode]) 
     }
    setMode(mode)
   }
-
-
-  const back  = () => {
-    let newHistory;
+  function back() {
     if (history.length > 1) {
-      newHistory = [...history.slice(0, -1)]
-    } else {
-      newHistory = [...history]
+      setMode(history[history.length - 2]);
+      setHistory(prev => [...prev.slice(0, -1)]);
     }
-    setMode(history[history.length -1])
-
   }
+  console.log(history, mode)
 
   return { mode, transition, back }
 };

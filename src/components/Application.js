@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+
 
 import "components/Application.scss";
 import DayList from "./DayList.js";
@@ -20,13 +20,13 @@ export default function Application() {
   const dailyAppointments =
     getAppointmentsForDay(state, state.day)
       .map(appointment => {
-        const interview = getInterview(state, appointment.interview);
+     
         return (
           <Appointment
             key={appointment.id}
             id={appointment.id}
             time={appointment.time}
-            interview={interview}
+            interview={getInterview(state, appointment.interview)}
             interviewers={dailyInterviewers}
             bookInterview={bookInterview}
             cancelInterview={cancelInterview}
@@ -46,7 +46,7 @@ export default function Application() {
           <DayList
             days={state.days}
             value={state.day}
-            onChange={setDay}
+            setDay={setDay}
           />
         </nav>
         <img

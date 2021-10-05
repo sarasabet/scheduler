@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 
-export  default function useApplicationData() {
+export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -50,7 +50,7 @@ export  default function useApplicationData() {
       });
   };
   // to cancel /delete an interview from API 
-  const cancelInterview = id => {
+  const cancelInterview = async id => {
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -60,10 +60,19 @@ export  default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+
+    return axios.delete(`/api/appointments/${id}`)
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        });
+      });
   }
+
   return {
-    state, 
-    setDay, 
+    state,
+    setDay,
     bookInterview,
     cancelInterview
   }

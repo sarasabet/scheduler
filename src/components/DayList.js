@@ -3,8 +3,9 @@ import DayListItem from "./DayListItem.js"
 
 
 export default function DayList(props) {
-  const { days, value, setDay } = props;
+  const { days, selectedDay, setDay } = props;
   const daysArr = [];
+
 
   days.map((currentDay) => {
     return daysArr.push(
@@ -12,7 +13,7 @@ export default function DayList(props) {
         key={currentDay.id}
         name={currentDay.name}
         spots={currentDay.spots}
-        selected={currentDay.name === value}
+        selected={currentDay.name === selectedDay}
         setDay={ setDay}
       />
     );

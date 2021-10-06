@@ -43,14 +43,17 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
+        const days = updateSpots(id, appointments)
         setState({
           ...state,
+          days,
           appointments
         });
       });
   };
   // to cancel /delete an interview from API 
   const cancelInterview = async id => {
+
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -63,17 +66,46 @@ export default function useApplicationData() {
 
     return axios.delete(`/api/appointments/${id}`)
       .then(() => {
+        const days = updateSpots(id, appointments)
         setState({
           ...state,
+          days,
           appointments
         });
       });
   }
 
+  const updateSpots = (id, appointments) => {
+
+    return state.days.map(day => {
+
+      let availableSpots = 0;
+
+      if (day.appointments.includes(id)) {
+        for (const appointment_id of day.appointments) {
+          if (appointments[appointment_id].interview === null) {
+            availableSpots += 1
+          }
+        }
+        day.spots = availableSpots
+
+
+      }
+      return day
+    })
+
+
+
+
+  }
+
+
   return {
+
     state,
     setDay,
     bookInterview,
-    cancelInterview
+    cancelInterview,
+
   }
 }

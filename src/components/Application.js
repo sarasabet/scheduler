@@ -10,10 +10,12 @@ import useApplicationData from "../hooks/useApplicationData.js"
 
 export default function Application() {
   const {
+    
     state,
     setDay,
     bookInterview,
-    cancelInterview
+    cancelInterview,
+    
   } = useApplicationData();
 
   const dailyInterviewers = getInterviewersForDay(state, state.day);
@@ -47,6 +49,7 @@ export default function Application() {
             days={state.days}
             value={state.day}
             setDay={setDay}
+           
           />
         </nav>
         <img
@@ -61,3 +64,4 @@ export default function Application() {
     </main>
   );
 }
+

@@ -12,7 +12,6 @@ import Error from "./Error";
 
 export default function Appointment(props) {
 
-  // const props.interview.interviewer = []
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";

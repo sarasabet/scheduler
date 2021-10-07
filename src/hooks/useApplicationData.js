@@ -11,7 +11,9 @@ export default function useApplicationData() {
   });
 
   //udpate dayeState 
-  const setDay = day => setState({ ...state, day });
+  const setDay = day => {
+    setState({ ...state, day });
+  }
 
   useEffect(() => {
     Promise.all([

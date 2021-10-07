@@ -16,7 +16,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public --ci",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "cypress": "cypress open -P ."
+
+   
+    
   },
   "browserslist": {
     "production": [
@@ -52,4 +56,5 @@
     ]
   },
   "proxy": "http://localhost:8001"
+  
 }

@@ -11,7 +11,7 @@ export default function DayList(props) {
     return daysArr.push(
       <DayListItem
         key={currentDay.id}
-        name={currentDay.name}
+        name={currentDay.name }
         spots={currentDay.spots}
         selected={currentDay.name === selectedDay}
         setDay={ setDay}

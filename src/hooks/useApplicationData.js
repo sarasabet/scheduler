@@ -14,7 +14,7 @@ export default function useApplicationData() {
   const setDay = day => {
     setState({ ...state, day });
   }
-
+  //fetch data from API and set proppe satate 
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -32,6 +32,7 @@ export default function useApplicationData() {
       });
   }, []);
 
+  //get id / {interview}  and update the state , start from the lowest level to spread data =>interview: { ...interview }=> [id]: appointment
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
@@ -77,6 +78,7 @@ export default function useApplicationData() {
       });
   }
 
+  // calculate and update remainin /available data , based on null interview 
   const updateSpots = (id, appointments) => {
 
     return state.days.map(day => {
@@ -90,18 +92,10 @@ export default function useApplicationData() {
           }
         }
         day.spots = availableSpots
-
-
       }
       return day
     })
-
-
-
-
   }
-
-
   return {
 
     state,

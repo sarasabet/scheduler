@@ -1,4 +1,5 @@
 import React from "react";
+//parent index.js
 
 export default function Status(props) {
   return (

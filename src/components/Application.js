@@ -1,6 +1,4 @@
 import React from "react";
-
-
 import "components/Application.scss";
 import DayList from "./DayList.js";
 import Appointment from "./Appointment"
@@ -10,19 +8,19 @@ import useApplicationData from "../hooks/useApplicationData.js"
 
 export default function Application() {
   const {
-    
+
     state,
     setDay,
     bookInterview,
     cancelInterview,
-    
+
   } = useApplicationData();
 
   const dailyInterviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments =
     getAppointmentsForDay(state, state.day)
       .map(appointment => {
-     
+
         return (
           <Appointment
             key={appointment.id}
@@ -49,7 +47,7 @@ export default function Application() {
             days={state.days}
             selectedDay={state.day}
             setDay={setDay}
-           
+
           />
         </nav>
         <img

@@ -1,6 +1,4 @@
 import React, { Fragment } from 'react'
-
-import "components/Application.scss";
 import Header from './Header.js';
 import Show from './Show.js';
 import Empty from './Empty.js';
@@ -11,7 +9,7 @@ import Confirm from './Confirm.js';
 import Error from "./Error";
 
 export default function Appointment(props) {
-
+  //constant list bellow helps to give prpe name to each phase/step inorder to be able track the internal navigation of the Appointment 
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -27,7 +25,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
 
   );
-
+/// save the appointmnet, if the interviewer is not slected , doe snot proceed dthe request , also change the mode to proper one /handle err
   function save(name, interviewer) {
     if (!interviewer) { return null }
     const interview = {
@@ -40,7 +38,7 @@ export default function Appointment(props) {
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
   }
-
+// delet a selected appointmnet => chg the mode to empty /erro 
   function deleteAppointment(id) {
 
     transition(DELETING, true)
@@ -83,8 +81,8 @@ export default function Appointment(props) {
             interviewer={props.interview.interviewer.id}
             interviewers={props.interviewers}
             onCancel={() => back()}
-            onSave={ save}
-            // {/*   onSave={() => save()}*/}
+            onSave={save}
+          // {/*   onSave={() => save()}*/}
           />
         )}
         {mode === DELETING && (

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "components/Button.js";
-
+//parent index.js
 
 
 export default function Confirm(props) {

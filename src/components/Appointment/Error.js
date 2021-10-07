@@ -1,8 +1,12 @@
 import React from "react";
+//parent index.js
+
 
 export default function Error(props) {
   const { message, onClose } = props;
+
   return (
+
     <main className="appointment__card appointment__card--error">
       <section className="appointment__error-message">
         <h1 className="text--semi-bold">Error</h1>

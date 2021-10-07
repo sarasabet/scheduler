@@ -6,7 +6,7 @@ export default function DayList(props) {
   const { days, selectedDay, setDay } = props;
   const daysArr = [];
 
-
+// map each day of day list {days}, passing a key to each day/item is critcal 
   days.map((currentDay) => {
     return daysArr.push(
       <DayListItem

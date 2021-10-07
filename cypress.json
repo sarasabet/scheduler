@@ -1,3 +1,6 @@
+// tells Cypress to use http://localhost:8000 as the base url, so that when we cy.visit("/") we do not need to include the host name and port.
+
+
 {
   "baseUrl": "http://localhost:8000",
   "viewportWidth": 1280,
